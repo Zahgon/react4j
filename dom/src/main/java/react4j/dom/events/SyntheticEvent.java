@@ -7,82 +7,82 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class SyntheticEvent<E extends Event>
-{
-  private boolean bubbles;
-  private boolean cancelable;
-  private Element currentTarget;
-  private boolean defaultPrevented;
-  private int eventPhase;
-  private boolean isTrusted;
-  private E nativeEvent;
-  private Element target;
-  private JsDate timeStamp;
-  private String type;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class SyntheticEvent<E extends Event> {
 
-  public native void preventDefault();
+    private boolean bubbles;
 
-  public native boolean isDefaultPrevented();
+    private boolean cancelable;
 
-  public native boolean isPropagationStopped();
+    private Element currentTarget;
 
-  public native void stopPropagation();
+    private boolean defaultPrevented;
 
-  public native void persist();
+    private int eventPhase;
 
-  @JsOverlay
-  public final boolean isBubbles()
-  {
-    return bubbles;
-  }
+    private boolean isTrusted;
 
-  @JsOverlay
-  public final boolean isCancelable()
-  {
-    return cancelable;
-  }
+    private E nativeEvent;
 
-  @JsOverlay
-  public final Element getCurrentTarget()
-  {
-    return currentTarget;
-  }
+    private Element target;
 
-  @JsOverlay
-  public final int getEventPhase()
-  {
-    return eventPhase;
-  }
+    private JsDate timeStamp;
 
-  @JsOverlay
-  public final boolean isTrusted()
-  {
-    return isTrusted;
-  }
+    private String type;
 
-  @JsOverlay
-  public final E getNativeEvent()
-  {
-    return nativeEvent;
-  }
+    public native void preventDefault();
 
-  @JsOverlay
-  public final Element getTarget()
-  {
-    return target;
-  }
+    public native boolean isDefaultPrevented();
 
-  @JsOverlay
-  public final JsDate getTimeStamp()
-  {
-    return timeStamp;
-  }
+    public native boolean isPropagationStopped();
 
-  @JsOverlay
-  public final String getType()
-  {
-    return type;
-  }
+    public native void stopPropagation();
+
+    public native void persist();
+
+    @JsOverlay
+    public final boolean isBubbles() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isCancelable() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final Element getCurrentTarget() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getEventPhase() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isTrusted() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final E getNativeEvent() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final Element getTarget() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final JsDate getTimeStamp() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final String getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

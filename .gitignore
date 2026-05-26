@@ -17,3 +17,8 @@
 /website/static/api
 /yarn-error.log
 host-factory-generator/src/main/data/*.html
+
+.aider*
+logs/
+.commit0_scripts/
+.github/workflows/

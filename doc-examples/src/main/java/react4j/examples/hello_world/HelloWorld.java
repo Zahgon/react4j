@@ -5,11 +5,9 @@ import com.google.gwt.core.client.EntryPoint;
 import react4j.dom.ReactDOM;
 import static react4j.dom.DOM.*;
 
-public class HelloWorld
-  implements EntryPoint
-{
-  public void onModuleLoad()
-  {
-    ReactDOM.render( h1( "Hello World" ), WindowGlobal.document().getElementById( "app" ) );
-  }
+public class HelloWorld implements EntryPoint {
+
+    public void onModuleLoad() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -11,42 +11,40 @@ import react4j.ReactNode;
 /**
  * A React root represents the top level DOM element that react binds to.
  */
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "?" )
-public interface ReactRoot
-{
-  @FunctionalInterface
-  @JsFunction
-  interface PostRenderCallbackFn
-  {
-    /**
-     * Perform an action.
-     */
-    void call();
-  }
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "?")
+public interface ReactRoot {
 
-  @FunctionalInterface
-  @JsFunction
-  interface PostUnmountCallbackFn
-  {
-    /**
-     * Perform an action.
-     */
-    void call();
-  }
+    @FunctionalInterface
+    @JsFunction
+    interface PostRenderCallbackFn {
 
-  @JsOverlay
-  default void render( @Nonnull ReactNode children )
-  {
-    render( children, null );
-  }
+        /**
+         * Perform an action.
+         */
+        void call();
+    }
 
-  void render( @Nonnull ReactNode children, @Nullable PostRenderCallbackFn callback );
+    @FunctionalInterface
+    @JsFunction
+    interface PostUnmountCallbackFn {
 
-  @JsOverlay
-  default void unmount()
-  {
-    unmount( null );
-  }
+        /**
+         * Perform an action.
+         */
+        void call();
+    }
 
-  void unmount( @Nullable PostUnmountCallbackFn callback );
+    @JsOverlay
+    default void render(@Nonnull ReactNode children) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void render(@Nonnull ReactNode children, @Nullable PostRenderCallbackFn callback);
+
+    @JsOverlay
+    default void unmount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void unmount(@Nullable PostUnmountCallbackFn callback);
 }

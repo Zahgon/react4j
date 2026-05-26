@@ -4,26 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
 
-final class BuilderDescriptor
-{
-  @Nonnull
-  private final List<Step> _steps = new ArrayList<>();
+final class BuilderDescriptor {
 
-  BuilderDescriptor()
-  {
-  }
+    @Nonnull
+    private final List<Step> _steps = new ArrayList<>();
 
-  @Nonnull
-  Step addStep()
-  {
-    final Step step = new Step( _steps.size() + 1 );
-    getSteps().add( step );
-    return step;
-  }
+    BuilderDescriptor() {
+    }
 
-  @Nonnull
-  List<Step> getSteps()
-  {
-    return _steps;
-  }
+    @Nonnull
+    Step addStep() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<Step> getSteps() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

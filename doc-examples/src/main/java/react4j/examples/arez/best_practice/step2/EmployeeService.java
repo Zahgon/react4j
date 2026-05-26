@@ -5,61 +5,55 @@ import arez.annotations.ArezComponent;
 import arez.annotations.Observable;
 
 @ArezComponent
-public abstract class EmployeeService
-{
-  private boolean _loading;
-  private String _employeeData;
-  private String _errorMessage;
-  private boolean _loadEmployeeData;
+public abstract class EmployeeService {
 
-  @Observable( name = "loadEmployeeData" )
-  public boolean shouldLoadEmployeeData()
-  {
-    return _loadEmployeeData;
-  }
+    private boolean _loading;
 
-  public void setLoadEmployeeData( final boolean loadEmployeeData )
-  {
-    _loadEmployeeData = loadEmployeeData;
-  }
+    private String _employeeData;
 
-  @Action
-  public void changeToEmployeeView()
-  {
-    setLoadEmployeeData( true );
-  }
+    private String _errorMessage;
 
-  //EXAMPLE ENDS HERE
-  @Observable
-  public boolean isLoading()
-  {
-    return _loading;
-  }
+    private boolean _loadEmployeeData;
 
-  public void setLoading( final boolean loading )
-  {
-    _loading = loading;
-  }
+    @Observable(name = "loadEmployeeData")
+    public boolean shouldLoadEmployeeData() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Observable
-  public String getEmployeeData()
-  {
-    return _employeeData;
-  }
+    public void setLoadEmployeeData(final boolean loadEmployeeData) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public void setEmployeeData( final String employeeData )
-  {
-    _employeeData = employeeData;
-  }
+    @Action
+    public void changeToEmployeeView() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Observable
-  public String getErrorMessage()
-  {
-    return _errorMessage;
-  }
+    //EXAMPLE ENDS HERE
+    @Observable
+    public boolean isLoading() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public void setErrorMessage( final String errorMessage )
-  {
-    _errorMessage = errorMessage;
-  }
+    public void setLoading(final boolean loading) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Observable
+    public String getEmployeeData() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public void setEmployeeData(final String employeeData) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Observable
+    public String getErrorMessage() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public void setErrorMessage(final String errorMessage) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -12,41 +12,17 @@ import react4j.examples.arez.step2.model.AppData;
 import react4j.examples.arez.step2.model.FilterMode;
 import static react4j.dom.DOM.*;
 
-@View( type = View.Type.TRACKING )
-abstract class Footer
-{
-  @Nullable
-  @Render
-  ReactNode render()
-  {
-    final FilterMode filterMode = AppData.viewService.getFilterMode();
-    return
-      footer( new HtmlProps().className( "footer" ),
-              FooterTodoCountBuilder.build(),
-              ul( new HtmlProps().className( "filters" ),
-                  li( a( new AnchorProps()
-                           .className( FilterMode.ALL == filterMode ? "selected" : "" )
-                           .href( "#" ), "All" )
-                  ),
-                  li( a( new AnchorProps()
-                           .className( FilterMode.ACTIVE == filterMode ? "selected" : "" )
-                           .href( "#active" ), "Active" )
-                  ),
-                  li( a( new AnchorProps()
-                           .className( FilterMode.COMPLETED == filterMode ? "selected" : "" )
-                           .href( "#completed" ), "Completed" )
-                  )
-              ),
-              hasCompletedItems() ?
-              button( new BtnProps().className( "clear-completed" ).onClick( e -> AppData.service.clearCompleted() ),
-                      "Clear Completed" ) :
-              null
-      );
-  }
+@View(type = View.Type.TRACKING)
+abstract class Footer {
 
-  @Memoize
-  boolean hasCompletedItems()
-  {
-    return AppData.model.completedCount() > 0;
-  }
+    @Nullable
+    @Render
+    ReactNode render() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Memoize
+    boolean hasCompletedItems() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

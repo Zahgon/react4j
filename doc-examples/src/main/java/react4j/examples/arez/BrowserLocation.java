@@ -27,180 +27,148 @@ import javax.annotation.Nonnull;
  * route should be updated.</p>
  */
 @ArezComponent
-public abstract class BrowserLocation
-{
-  @Nonnull
-  private final HashChangeEventListener _listener = this::onHashChangeEvent;
+public abstract class BrowserLocation {
 
-  /**
-   * The location according to the application.
-   */
-  @Nonnull
-  private String _location = "";
-  /**
-   * The location according to the browser.
-   */
-  @Nonnull
-  private String _browserLocation = "";
-  /**
-   * The location that the application is attempting to update the browser to.
-   */
-  @Nonnull
-  private String _targetLocation = "";
-  /**
-   * Should we prevent the default action associated with hash change?
-   */
-  private boolean _preventDefault = true;
+    @Nonnull
+    private final HashChangeEventListener _listener = this::onHashChangeEvent;
 
-  /**
-   * Create the model object.
-   *
-   * @return the BrowserLocation instance.
-   */
-  public static BrowserLocation create()
-  {
-    return new Arez_BrowserLocation();
-  }
-
-  BrowserLocation()
-  {
-  }
-
-  @PostConstruct
-  void postConstruct()
-  {
-    WindowGlobal.addHashchangeListener( _listener, false );
-    _targetLocation = _browserLocation = _location = getHash();
-  }
-
-  @PreDispose
-  void preDispose()
-  {
-    WindowGlobal.removeHashchangeListener(  _listener, false );
-  }
-
-  /**
-   * Return true if component will prevent default actions when hash.
-   *
-   * @return true if component will prevent default actions when hash.
-   */
-  public boolean shouldPreventDefault()
-  {
-    return _preventDefault;
-  }
-
-  /**
-   * Set a flag to determine whether events default action will be prevented.
-   *
-   * @param preventDefault true to prevent default action.
-   */
-  public void setPreventDefault( final boolean preventDefault )
-  {
-    _preventDefault = preventDefault;
-  }
-
-  /**
-   * Change the target location to the specified parameter.
-   * This will ultimately result in a side-effect that updates the browsers location.
-   * This location parameter should not include "#" as the first character.
-   *
-   * @param targetLocation the location to change to.
-   */
-  @Action
-  public void changeLocation( @Nonnull final String targetLocation )
-  {
-    _targetLocation = targetLocation;
-    if ( targetLocation.equals( getBrowserLocation() ) )
-    {
-      setLocation( targetLocation );
-    }
-    setHash( targetLocation );
-    /*
-     * setHash does not trigger a "hashchange" event so explicitly call the hook here
+    /**
+     * The location according to the application.
      */
-    updateBrowserLocation();
-  }
+    @Nonnull
+    private String _location = "";
 
-  /**
-   * Revert the browsers location to the application location.
-   */
-  @Action
-  public void resetBrowserLocation()
-  {
-    changeLocation( getLocation() );
-  }
+    /**
+     * The location according to the browser.
+     */
+    @Nonnull
+    private String _browserLocation = "";
 
-  /**
-   * Return the location as the application sees it.
-   * This return value does not include a "#" as the first character.
-   *
-   * @return the location.
-   */
-  @Observable
-  @Nonnull
-  public String getLocation()
-  {
-    return _location;
-  }
+    /**
+     * The location that the application is attempting to update the browser to.
+     */
+    @Nonnull
+    private String _targetLocation = "";
 
-  @Observable
-  void setLocation( @Nonnull final String location )
-  {
-    _location = Objects.requireNonNull( location );
-  }
+    /**
+     * Should we prevent the default action associated with hash change?
+     */
+    private boolean _preventDefault = true;
 
-  @Observable
-  @Nonnull
-  public String getBrowserLocation()
-  {
-    return _browserLocation;
-  }
-
-  void setBrowserLocation( @Nonnull final String browserLocation )
-  {
-    _browserLocation = Objects.requireNonNull( browserLocation );
-  }
-
-  @Action
-  void updateBrowserLocation()
-  {
-    final String location = getHash();
-    setBrowserLocation( location );
-    if ( _targetLocation.equals( location ) )
-    {
-      setLocation( location );
+    /**
+     * Create the model object.
+     *
+     * @return the BrowserLocation instance.
+     */
+    public static BrowserLocation create() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  private void onHashChangeEvent( @Nonnull final HashChangeEvent e )
-  {
-    if ( _preventDefault )
-    {
-      e.preventDefault();
+    BrowserLocation() {
     }
-    updateBrowserLocation();
-  }
 
-  @Nonnull
-  private String getHash()
-  {
-    return WindowGlobal.location().hash.substring( 1 );
-  }
+    @PostConstruct
+    void postConstruct() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  private void setHash( @Nonnull final String hash )
-  {
-    final Location location = WindowGlobal.location();
-    if ( 0 == hash.length() )
-    {
-      /*
+    @PreDispose
+    void preDispose() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Return true if component will prevent default actions when hash.
+     *
+     * @return true if component will prevent default actions when hash.
+     */
+    public boolean shouldPreventDefault() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Set a flag to determine whether events default action will be prevented.
+     *
+     * @param preventDefault true to prevent default action.
+     */
+    public void setPreventDefault(final boolean preventDefault) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Change the target location to the specified parameter.
+     * This will ultimately result in a side-effect that updates the browsers location.
+     * This location parameter should not include "#" as the first character.
+     *
+     * @param targetLocation the location to change to.
+     */
+    @Action
+    public void changeLocation(@Nonnull final String targetLocation) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Revert the browsers location to the application location.
+     */
+    @Action
+    public void resetBrowserLocation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Return the location as the application sees it.
+     * This return value does not include a "#" as the first character.
+     *
+     * @return the location.
+     */
+    @Observable
+    @Nonnull
+    public String getLocation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Observable
+    void setLocation(@Nonnull final String location) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Observable
+    @Nonnull
+    public String getBrowserLocation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setBrowserLocation(@Nonnull final String browserLocation) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Action
+    void updateBrowserLocation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private void onHashChangeEvent(@Nonnull final HashChangeEvent e) {
+        if (_preventDefault) {
+            e.preventDefault();
+        }
+        updateBrowserLocation();
+    }
+
+    @Nonnull
+    private String getHash() {
+        return WindowGlobal.location().hash.substring(1);
+    }
+
+    private void setHash(@Nonnull final String hash) {
+        final Location location = WindowGlobal.location();
+        if (0 == hash.length()) {
+            /*
        * This code is needed to remove the stray #.
        * See https://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-url-with-javascript-without-page-r/5298684#5298684
        */
-      WindowGlobal.history().pushState( "", WindowGlobal.document().title, location.pathname + location.search );
+            WindowGlobal.history().pushState("", WindowGlobal.document().title, location.pathname + location.search);
+        } else {
+            location.hash = hash;
+        }
     }
-    else
-    {
-      location.hash = hash;
-    }
-  }
 }

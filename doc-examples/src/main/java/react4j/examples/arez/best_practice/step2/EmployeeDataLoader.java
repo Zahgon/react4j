@@ -5,33 +5,20 @@ import arez.annotations.ComponentDependency;
 import arez.annotations.Observe;
 
 @ArezComponent
-public abstract class EmployeeDataLoader
-{
-  private final RemoteServiceAPI _remote;
-  @ComponentDependency
-  final EmployeeService _service;
+public abstract class EmployeeDataLoader {
 
-  EmployeeDataLoader( final RemoteServiceAPI remote, final EmployeeService service )
-  {
-    _remote = remote;
-    _service = service;
-  }
+    private final RemoteServiceAPI _remote;
 
-  @Observe
-  void loadEmployeeDataIfRequired()
-  {
-    if ( _service.shouldLoadEmployeeData() )
-    {
-      _service.setLoading( true );
-      _remote.loadEmployeeData( data -> {
-        _service.setLoading( false );
-        _service.setEmployeeData( data );
-        _service.setLoadEmployeeData( false );
-      }, errorMessage -> {
-        _service.setLoading( false );
-        _service.setErrorMessage( errorMessage );
-        _service.setLoadEmployeeData( false );
-      } );
+    @ComponentDependency
+    final EmployeeService _service;
+
+    EmployeeDataLoader(final RemoteServiceAPI remote, final EmployeeService service) {
+        _remote = remote;
+        _service = service;
     }
-  }
+
+    @Observe
+    void loadEmployeeDataIfRequired() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

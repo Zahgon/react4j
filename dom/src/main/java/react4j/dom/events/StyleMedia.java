@@ -5,16 +5,15 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-public class StyleMedia
-{
-  private String type;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+public class StyleMedia {
 
-  public native boolean matchMedium( @Nonnull String mediaquery );
+    private String type;
 
-  @JsOverlay
-  public final String getType()
-  {
-    return type;
-  }
+    public native boolean matchMedium(@Nonnull String mediaquery);
+
+    @JsOverlay
+    public final String getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -5,88 +5,86 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class KeyboardEvent
-  extends SyntheticEvent<akasha.KeyboardEvent>
-{
-  private boolean altKey;
-  private int charCode;
-  private boolean ctrlKey;
-  private String key;
-  private int keyCode;
-  private String locale;
-  private int location;
-  private boolean metaKey;
-  private boolean repeat;
-  private boolean shiftKey;
-  private int which;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class KeyboardEvent extends SyntheticEvent<akasha.KeyboardEvent> {
 
-  public native boolean getModifierState( @Nonnull String key );
+    private boolean altKey;
 
-  @JsOverlay
-  public final boolean isAltKey()
-  {
-    return altKey;
-  }
+    private int charCode;
 
-  @JsOverlay
-  public final int getCharCode()
-  {
-    return charCode;
-  }
+    private boolean ctrlKey;
 
-  @JsOverlay
-  public final boolean isCtrlKey()
-  {
-    return ctrlKey;
-  }
+    private String key;
 
-  @JsOverlay
-  public final String getKey()
-  {
-    return key;
-  }
+    private int keyCode;
 
-  @JsOverlay
-  public final int getKeyCode()
-  {
-    return keyCode;
-  }
+    private String locale;
 
-  @JsOverlay
-  public final String getLocale()
-  {
-    return locale;
-  }
+    private int location;
 
-  @JsOverlay
-  public final int getLocation()
-  {
-    return location;
-  }
+    private boolean metaKey;
 
-  @JsOverlay
-  public final boolean isMetaKey()
-  {
-    return metaKey;
-  }
+    private boolean repeat;
 
-  @JsOverlay
-  public final boolean isRepeat()
-  {
-    return repeat;
-  }
+    private boolean shiftKey;
 
-  @JsOverlay
-  public final boolean isShiftKey()
-  {
-    return shiftKey;
-  }
+    private int which;
 
-  @JsOverlay
-  public final int getWhich()
-  {
-    return which;
-  }
+    public native boolean getModifierState(@Nonnull String key);
+
+    @JsOverlay
+    public final boolean isAltKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getCharCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isCtrlKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final String getKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getKeyCode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final String getLocale() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getLocation() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isMetaKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isRepeat() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isShiftKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getWhich() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

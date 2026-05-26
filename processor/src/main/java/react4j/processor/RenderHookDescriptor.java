@@ -5,37 +5,33 @@ import javax.annotation.Nonnull;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.type.ExecutableType;
 
-final class RenderHookDescriptor
-{
-  private final int _sortOrder;
-  @Nonnull
-  private final ExecutableElement _method;
-  @Nonnull
-  private final ExecutableType _methodType;
+final class RenderHookDescriptor {
 
-  RenderHookDescriptor( final int sortOrder,
-                        @Nonnull final ExecutableElement method,
-                        @Nonnull final ExecutableType methodType )
-  {
-    _sortOrder = sortOrder;
-    _method = Objects.requireNonNull( method );
-    _methodType = Objects.requireNonNull( methodType );
-  }
+    private final int _sortOrder;
 
-  int getSortOrder()
-  {
-    return _sortOrder;
-  }
+    @Nonnull
+    private final ExecutableElement _method;
 
-  @Nonnull
-  ExecutableElement getMethod()
-  {
-    return _method;
-  }
+    @Nonnull
+    private final ExecutableType _methodType;
 
-  @Nonnull
-  ExecutableType getMethodType()
-  {
-    return _methodType;
-  }
+    RenderHookDescriptor(final int sortOrder, @Nonnull final ExecutableElement method, @Nonnull final ExecutableType methodType) {
+        _sortOrder = sortOrder;
+        _method = Objects.requireNonNull(method);
+        _methodType = Objects.requireNonNull(methodType);
+    }
+
+    int getSortOrder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ExecutableElement getMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ExecutableType getMethodType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

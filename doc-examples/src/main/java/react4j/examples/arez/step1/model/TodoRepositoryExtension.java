@@ -4,25 +4,22 @@ import arez.annotations.ArezComponentLike;
 import arez.annotations.Memoize;
 
 @ArezComponentLike
-public interface TodoRepositoryExtension
-{
-  @Memoize
-  default int totalCount()
-  {
-    return self().findAll().size();
-  }
+public interface TodoRepositoryExtension {
 
-  @Memoize
-  default int activeCount()
-  {
-    return (int) self().findAll().stream().filter( todo -> !todo.isCompleted() ).count();
-  }
+    @Memoize
+    default int totalCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Memoize
-  default int completedCount()
-  {
-    return totalCount() - activeCount();
-  }
+    @Memoize
+    default int activeCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  TodoRepository self();
+    @Memoize
+    default int completedCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    TodoRepository self();
 }

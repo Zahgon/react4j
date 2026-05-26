@@ -5,16 +5,14 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class DragEvent
-  extends SyntheticEvent<akasha.DragEvent>
-{
-  private DataTransfer dataTransfer;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class DragEvent extends SyntheticEvent<akasha.DragEvent> {
 
-  @JsOverlay
-  public final DataTransfer getDataTransfer()
-  {
-    return dataTransfer;
-  }
+    private DataTransfer dataTransfer;
+
+    @JsOverlay
+    public final DataTransfer getDataTransfer() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

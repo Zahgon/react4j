@@ -7,47 +7,38 @@ import arez.annotations.Memoize;
 import arez.component.internal.AbstractRepository;
 import javax.annotation.Nonnull;
 
-@ArezComponent( service = Feature.ENABLE )
-public abstract class TodoRepository
-  extends AbstractRepository<Integer, Todo, TodoRepository>
-{
-  @Action
-  @Nonnull
-  Todo create( @Nonnull final String title, final boolean completed )
-  {
-    final Todo entity = new Arez_Todo( title, completed );
-    attach( entity );
-    return entity;
-  }
+@ArezComponent(service = Feature.ENABLE)
+public abstract class TodoRepository extends AbstractRepository<Integer, Todo, TodoRepository> {
 
-  @Memoize
-  public boolean isNotEmpty()
-  {
-    return 0 != totalCount();
-  }
+    @Action
+    @Nonnull
+    Todo create(@Nonnull final String title, final boolean completed) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Memoize
-  public int totalCount()
-  {
-    return (int) entities().count();
-  }
+    @Memoize
+    public boolean isNotEmpty() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Memoize
-  int activeCount()
-  {
-    return (int) entities().filter( todo -> !todo.isCompleted() ).count();
-  }
+    @Memoize
+    public int totalCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Memoize
-  public int completedCount()
-  {
-    return totalCount() - activeCount();
-  }
+    @Memoize
+    int activeCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Override
-  @Action( reportParameters = false )
-  public void destroy( @Nonnull final Todo entity )
-  {
-    super.destroy( entity );
-  }
+    @Memoize
+    public int completedCount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Override
+    @Action(reportParameters = false)
+    public void destroy(@Nonnull final Todo entity) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

@@ -7,41 +7,37 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 
 @ArezComponent
-public abstract class Todo
-{
-  @Nonnull
-  private String _title;
-  private boolean _completed;
+public abstract class Todo {
 
-  Todo( @Nonnull final String title, final boolean completed )
-  {
-    _title = Objects.requireNonNull( title );
-    _completed = completed;
-  }
+    @Nonnull
+    private String _title;
 
-  @ComponentIdRef
-  public abstract int getId();
+    private boolean _completed;
 
-  @Observable
-  @Nonnull
-  public String getTitle()
-  {
-    return _title;
-  }
+    Todo(@Nonnull final String title, final boolean completed) {
+        _title = Objects.requireNonNull(title);
+        _completed = completed;
+    }
 
-  public void setTitle( @Nonnull final String title )
-  {
-    _title = Objects.requireNonNull( title );
-  }
+    @ComponentIdRef
+    public abstract int getId();
 
-  @Observable
-  public boolean isCompleted()
-  {
-    return _completed;
-  }
+    @Observable
+    @Nonnull
+    public String getTitle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public void setCompleted( final boolean completed )
-  {
-    _completed = completed;
-  }
+    public void setTitle(@Nonnull final String title) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Observable
+    public boolean isCompleted() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public void setCompleted(final boolean completed) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

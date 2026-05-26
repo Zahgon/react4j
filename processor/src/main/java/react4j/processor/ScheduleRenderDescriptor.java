@@ -4,26 +4,24 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.lang.model.element.ExecutableElement;
 
-final class ScheduleRenderDescriptor
-{
-  @Nonnull
-  private final ExecutableElement _method;
-  private final boolean _skipShouldViewUpdate;
+final class ScheduleRenderDescriptor {
 
-  ScheduleRenderDescriptor( @Nonnull final ExecutableElement method, final boolean skipShouldViewUpdate )
-  {
-    _method = Objects.requireNonNull( method );
-    _skipShouldViewUpdate = skipShouldViewUpdate;
-  }
+    @Nonnull
+    private final ExecutableElement _method;
 
-  @Nonnull
-  ExecutableElement getMethod()
-  {
-    return _method;
-  }
+    private final boolean _skipShouldViewUpdate;
 
-  boolean skipShouldViewUpdate()
-  {
-    return _skipShouldViewUpdate;
-  }
+    ScheduleRenderDescriptor(@Nonnull final ExecutableElement method, final boolean skipShouldViewUpdate) {
+        _method = Objects.requireNonNull(method);
+        _skipShouldViewUpdate = skipShouldViewUpdate;
+    }
+
+    @Nonnull
+    ExecutableElement getMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean skipShouldViewUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

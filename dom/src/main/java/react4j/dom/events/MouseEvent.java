@@ -6,102 +6,100 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class MouseEvent
-  extends SyntheticEvent<akasha.MouseEvent>
-{
-  private boolean altKey;
-  private int button;
-  private int buttons;
-  private int clientX;
-  private int clientY;
-  private boolean ctrlKey;
-  private boolean metaKey;
-  private int pageX;
-  private int pageY;
-  private EventTarget relatedTarget;
-  private int screenX;
-  private int screenY;
-  private boolean shiftKey;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class MouseEvent extends SyntheticEvent<akasha.MouseEvent> {
 
-  public native boolean getModifierState( @Nonnull String key );
+    private boolean altKey;
 
-  @JsOverlay
-  public final boolean isAltKey()
-  {
-    return altKey;
-  }
+    private int button;
 
-  @JsOverlay
-  public final int getButton()
-  {
-    return button;
-  }
+    private int buttons;
 
-  @JsOverlay
-  public final int getButtons()
-  {
-    return buttons;
-  }
+    private int clientX;
 
-  @JsOverlay
-  public final int getClientX()
-  {
-    return clientX;
-  }
+    private int clientY;
 
-  @JsOverlay
-  public final int getClientY()
-  {
-    return clientY;
-  }
+    private boolean ctrlKey;
 
-  @JsOverlay
-  public final boolean isCtrlKey()
-  {
-    return ctrlKey;
-  }
+    private boolean metaKey;
 
-  @JsOverlay
-  public final boolean isMetaKey()
-  {
-    return metaKey;
-  }
+    private int pageX;
 
-  @JsOverlay
-  public final int getPageX()
-  {
-    return pageX;
-  }
+    private int pageY;
 
-  @JsOverlay
-  public final int getPageY()
-  {
-    return pageY;
-  }
+    private EventTarget relatedTarget;
 
-  @JsOverlay
-  public final EventTarget getRelatedTarget()
-  {
-    return relatedTarget;
-  }
+    private int screenX;
 
-  @JsOverlay
-  public final int getScreenX()
-  {
-    return screenX;
-  }
+    private int screenY;
 
-  @JsOverlay
-  public final int getScreenY()
-  {
-    return screenY;
-  }
+    private boolean shiftKey;
 
-  @JsOverlay
-  public final boolean isShiftKey()
-  {
-    return shiftKey;
-  }
+    public native boolean getModifierState(@Nonnull String key);
+
+    @JsOverlay
+    public final boolean isAltKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getButton() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getButtons() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getClientX() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getClientY() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isCtrlKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isMetaKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getPageX() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getPageY() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final EventTarget getRelatedTarget() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getScreenX() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getScreenY() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isShiftKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

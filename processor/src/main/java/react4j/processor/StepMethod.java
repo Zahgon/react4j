@@ -19,112 +19,95 @@ import javax.lang.model.type.TypeMirror;
  * <li>name = child, key = children: This is for multi child views built one child at a time. The implementation returns if null passed to it, initializes JsArray if null, adds child to array.</li>
  * </ul>
  */
-final class StepMethod
-{
-  /**
-   * The name of the input and the corresponding builder method.
-   */
-  @Nonnull
-  private final String _name;
-  /**
-   * The key under which the input is added into inputs.
-   */
-  @Nonnull
-  private final String _key;
-  /**
-   * The expected type of the input.
-   */
-  @Nonnull
-  private final TypeName _type;
-  @Nullable
-  private final InputDescriptor _input;
-  /**
-   * After this method is called should the builder STAY on the same step, ADVANCE to the next step or TERMINATE builder and call build().
-   */
-  @Nonnull
-  private final StepMethodType _stepMethodType;
+final class StepMethod {
 
-  StepMethod( @Nonnull final InputDescriptor input, @Nonnull final StepMethodType stepMethodType )
-  {
-    this( input.getName(),
-          input.getName(),
-          TypeName.get( input.getType() ),
-          input,
-          stepMethodType );
-  }
+    /**
+     * The name of the input and the corresponding builder method.
+     */
+    @Nonnull
+    private final String _name;
 
-  StepMethod( @Nonnull final String name,
-              @Nonnull final String key,
-              @Nonnull final TypeName type,
-              @Nullable final InputDescriptor input,
-              @Nonnull final StepMethodType stepMethodType )
-  {
-    _name = Objects.requireNonNull( name );
-    _key = Objects.requireNonNull( key );
-    _type = Objects.requireNonNull( type );
-    _input = input;
-    _stepMethodType = Objects.requireNonNull( stepMethodType );
-  }
+    /**
+     * The key under which the input is added into inputs.
+     */
+    @Nonnull
+    private final String _key;
 
-  @Nonnull
-  String getName()
-  {
-    return _name;
-  }
+    /**
+     * The expected type of the input.
+     */
+    @Nonnull
+    private final TypeName _type;
 
-  @Nonnull
-  TypeName getType()
-  {
-    return _type;
-  }
+    @Nullable
+    private final InputDescriptor _input;
 
-  @Nullable
-  InputDescriptor getInput()
-  {
-    return _input;
-  }
+    /**
+     * After this method is called should the builder STAY on the same step, ADVANCE to the next step or TERMINATE builder and call build().
+     */
+    @Nonnull
+    private final StepMethodType _stepMethodType;
 
-  @Nullable
-  Element getElement()
-  {
-    return null != _input ? _input.getElement() : null;
-  }
+    StepMethod(@Nonnull final InputDescriptor input, @Nonnull final StepMethodType stepMethodType) {
+        this(input.getName(), input.getName(), TypeName.get(input.getType()), input, stepMethodType);
+    }
 
-  @Nullable
-  TypeMirror getTypeMirror()
-  {
-    return null != _input ? _input.getType() : null;
-  }
+    StepMethod(@Nonnull final String name, @Nonnull final String key, @Nonnull final TypeName type, @Nullable final InputDescriptor input, @Nonnull final StepMethodType stepMethodType) {
+        _name = Objects.requireNonNull(name);
+        _key = Objects.requireNonNull(key);
+        _type = Objects.requireNonNull(type);
+        _input = input;
+        _stepMethodType = Objects.requireNonNull(stepMethodType);
+    }
 
-  @Nullable
-  ExecutableElement getMethod()
-  {
-    return null != _input ? _input.getMethod() : null;
-  }
+    @Nonnull
+    String getName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Nonnull
-  StepMethodType getStepMethodType()
-  {
-    return _stepMethodType;
-  }
+    @Nonnull
+    TypeName getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isBuildIntrinsic()
-  {
-    return getName().equals( "build" );
-  }
+    @Nullable
+    InputDescriptor getInput() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isChildIntrinsic()
-  {
-    return getName().equals( "child" ) && _key.equals( "child" );
-  }
+    @Nullable
+    Element getElement() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isChildrenIntrinsic()
-  {
-    return getName().equals( "children" ) && _key.equals( "children" );
-  }
+    @Nullable
+    TypeMirror getTypeMirror() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isChildrenStreamIntrinsic()
-  {
-    return getName().equals( "children" ) && _key.equals( "*children_stream*" );
-  }
+    @Nullable
+    ExecutableElement getMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    StepMethodType getStepMethodType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isBuildIntrinsic() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isChildIntrinsic() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isChildrenIntrinsic() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isChildrenStreamIntrinsic() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

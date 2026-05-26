@@ -8,45 +8,15 @@ import javax.annotation.Nonnull;
  * Non-optional inputs come first, then optional inputs and finally the child or children input.
  * Within each group, constructor parameter inputs precede method inputs.
  */
-final class InputComparator
-  implements Comparator<InputDescriptor>
-{
-  static final InputComparator COMPARATOR = new InputComparator();
+final class InputComparator implements Comparator<InputDescriptor> {
 
-  private InputComparator()
-  {
-  }
+    static final InputComparator COMPARATOR = new InputComparator();
 
-  @Override
-  public int compare( @Nonnull final InputDescriptor o1, @Nonnull final InputDescriptor o2 )
-  {
-    if ( o1.isSpecialChildrenInput() )
-    {
-      return 1;
+    private InputComparator() {
     }
-    else if ( o2.isSpecialChildrenInput() )
-    {
-      return -1;
+
+    @Override
+    public int compare(@Nonnull final InputDescriptor o1, @Nonnull final InputDescriptor o2) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else if ( o2.isOptional() && o1.isRequired() )
-    {
-      return -1;
-    }
-    else if ( o1.isOptional() && o2.isRequired() )
-    {
-      return 1;
-    }
-    else if ( o1.isImmutable() && o2.isMethodInput() )
-    {
-      return -1;
-    }
-    else if ( o1.isMethodInput() && o2.isImmutable() )
-    {
-      return 1;
-    }
-    else
-    {
-      return 0;
-    }
-  }
 }

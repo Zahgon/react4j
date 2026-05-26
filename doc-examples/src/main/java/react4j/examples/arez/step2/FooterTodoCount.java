@@ -8,19 +8,12 @@ import react4j.dom.proptypes.html.HtmlProps;
 import react4j.examples.arez.step2.model.AppData;
 import static react4j.dom.DOM.*;
 
-@View( type = View.Type.TRACKING )
-abstract class FooterTodoCount
-{
-  @Render
-  @Nonnull
-  ReactNode render()
-  {
-    final int count = AppData.model.totalCount();
-    final String activeTodoWord = "item" + ( count == 1 ? "" : "s" );
-    return
-      span( new HtmlProps().className( "todo-count" ),
-            strong( Integer.toString( count ) ),
-            text( " " + activeTodoWord + " left" )
-      );
-  }
+@View(type = View.Type.TRACKING)
+abstract class FooterTodoCount {
+
+    @Render
+    @Nonnull
+    ReactNode render() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

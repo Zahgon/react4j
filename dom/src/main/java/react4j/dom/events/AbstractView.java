@@ -5,22 +5,21 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class AbstractView
-{
-  private StyleMedia styleMedia;
-  private Document document;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class AbstractView {
 
-  @JsOverlay
-  public final StyleMedia getStyleMedia()
-  {
-    return styleMedia;
-  }
+    private StyleMedia styleMedia;
 
-  @JsOverlay
-  public final Document getDocument()
-  {
-    return document;
-  }
+    private Document document;
+
+    @JsOverlay
+    public final StyleMedia getStyleMedia() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final Document getDocument() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

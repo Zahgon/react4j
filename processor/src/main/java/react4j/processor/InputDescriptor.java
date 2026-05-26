@@ -12,314 +12,231 @@ import org.realityforge.proton.AnnotationsUtil;
 import org.realityforge.proton.MemberChecks;
 import org.realityforge.proton.ProcessorException;
 
-@SuppressWarnings( "Duplicates" )
-final class InputDescriptor
-{
-  @Nonnull
-  private final ViewDescriptor _descriptor;
-  @Nonnull
-  private final String _name;
-  @Nonnull
-  private final String _qualifier;
-  @Nonnull
-  private final Element _element;
-  @Nonnull
-  private final TypeMirror _type;
-  @Nullable
-  private final ExecutableElement _method;
-  @Nullable
-  private final ExecutableType _methodType;
-  @Nullable
-  private final VariableElement _parameter;
-  private final boolean _fromTreeContext;
-  private final boolean _shouldUpdateOnChange;
-  private final boolean _observable;
-  private final boolean _disposable;
-  @Nullable
-  private final ImmutableInputKeyStrategy _immutableInputKeyStrategy;
-  @Nonnull
-  private final String _requiredValue;
-  private boolean _onChangePresent;
-  private boolean _suppressMutableInputAccessedInPostConstruct;
-  @Nullable
-  private VariableElement _defaultField;
-  @Nullable
-  private ExecutableElement _defaultMethod;
-  @Nullable
-  private ExecutableElement _validateMethod;
-  /**
-   * Flag set to true if input is optional.
-   */
-  private boolean _optional;
-  @Nullable
-  private Boolean _isNonNull;
+@SuppressWarnings("Duplicates")
+final class InputDescriptor {
 
-  InputDescriptor( @Nonnull final ViewDescriptor descriptor,
-                   @Nonnull final String name,
-                   @Nonnull final String qualifier,
-                   @Nonnull final Element element,
-                   @Nonnull final TypeMirror type,
-                   @Nullable final ExecutableElement method,
-                   @Nullable final ExecutableType methodType,
-                   @Nullable final VariableElement parameter,
-                   final boolean fromTreeContext,
-                   final boolean shouldUpdateOnChange,
-                   final boolean observable,
-                   final boolean disposable,
-                   @Nullable final ImmutableInputKeyStrategy immutableInputKeyStrategy,
-                   @Nonnull final String requiredValue )
-  {
-    _descriptor = Objects.requireNonNull( descriptor );
-    _name = Objects.requireNonNull( name );
-    _qualifier = Objects.requireNonNull( qualifier );
-    _element = Objects.requireNonNull( element );
-    _type = Objects.requireNonNull( type );
-    _method = method;
-    _methodType = methodType;
-    _parameter = parameter;
-    _fromTreeContext = fromTreeContext;
-    _shouldUpdateOnChange = shouldUpdateOnChange;
-    _observable = observable;
-    _disposable = disposable;
-    _immutableInputKeyStrategy = immutableInputKeyStrategy;
-    _requiredValue = Objects.requireNonNull( requiredValue );
-  }
+    @Nonnull
+    private final ViewDescriptor _descriptor;
 
-  @Nonnull
-  String getName()
-  {
-    return _name;
-  }
+    @Nonnull
+    private final String _name;
 
-  @Nonnull
-  String getQualifier()
-  {
-    return _qualifier;
-  }
+    @Nonnull
+    private final String _qualifier;
 
-  @Nonnull
-  Element getElement()
-  {
-    return _element;
-  }
+    @Nonnull
+    private final Element _element;
 
-  @Nonnull
-  TypeMirror getType()
-  {
-    return _type;
-  }
+    @Nonnull
+    private final TypeMirror _type;
 
-  boolean isMethodInput()
-  {
-    return !isImmutable();
-  }
+    @Nullable
+    private final ExecutableElement _method;
 
-  @Nullable
-  ExecutableElement getMethod()
-  {
-    return _method;
-  }
+    @Nullable
+    private final ExecutableType _methodType;
 
-  @Nullable
-  ExecutableType getMethodType()
-  {
-    return _methodType;
-  }
+    @Nullable
+    private final VariableElement _parameter;
 
-  @Nullable
-  VariableElement getParameter()
-  {
-    return _parameter;
-  }
+    private final boolean _fromTreeContext;
 
-  boolean shouldUpdateOnChange()
-  {
-    return _shouldUpdateOnChange;
-  }
+    private final boolean _shouldUpdateOnChange;
 
-  boolean isObservable()
-  {
-    return _observable;
-  }
+    private final boolean _observable;
 
-  boolean isDisposable()
-  {
-    return _disposable;
-  }
+    private final boolean _disposable;
 
-  boolean isImmutable()
-  {
-    return null != _immutableInputKeyStrategy;
-  }
+    @Nullable
+    private final ImmutableInputKeyStrategy _immutableInputKeyStrategy;
 
-  @Nonnull
-  String getRequiredValue()
-  {
-    return _requiredValue;
-  }
+    @Nonnull
+    private final String _requiredValue;
 
-  void markAsOnChangePresent()
-  {
-    _onChangePresent = true;
-  }
+    private boolean _onChangePresent;
 
-  void suppressMutableInputAccessedInPostConstruct()
-  {
-    _suppressMutableInputAccessedInPostConstruct = true;
-  }
+    private boolean _suppressMutableInputAccessedInPostConstruct;
 
-  boolean needsMutableInputAccessedInPostConstructInvariant()
-  {
-    return !_suppressMutableInputAccessedInPostConstruct && mayNeedMutableInputAccessedInPostConstructInvariant();
-  }
+    @Nullable
+    private VariableElement _defaultField;
 
-  boolean mayNeedMutableInputAccessedInPostConstructInvariant()
-  {
-    return !isImmutable() && !_onChangePresent && _descriptor.hasPostConstruct();
-  }
+    @Nullable
+    private ExecutableElement _defaultMethod;
 
-  @Nonnull
-  ImmutableInputKeyStrategy getImmutableInputKeyStrategy()
-  {
-    assert null != _immutableInputKeyStrategy;
-    return _immutableInputKeyStrategy;
-  }
+    @Nullable
+    private ExecutableElement _validateMethod;
 
-  boolean hasValidateMethod()
-  {
-    return null != _validateMethod;
-  }
+    /**
+     * Flag set to true if input is optional.
+     */
+    private boolean _optional;
 
-  @Nonnull
-  ExecutableElement getValidateMethod()
-  {
-    assert null != _validateMethod;
-    return _validateMethod;
-  }
+    @Nullable
+    private Boolean _isNonNull;
 
-  void setValidateMethod( @Nonnull final ExecutableElement method )
-  {
-    if ( null != _validateMethod )
-    {
-      throw new ProcessorException( MemberChecks.toSimpleName( Constants.INPUT_VALIDATE_CLASSNAME ) +
-                                    " target duplicates existing method named " + _validateMethod.getSimpleName(),
-                                    method );
+    InputDescriptor(@Nonnull final ViewDescriptor descriptor, @Nonnull final String name, @Nonnull final String qualifier, @Nonnull final Element element, @Nonnull final TypeMirror type, @Nullable final ExecutableElement method, @Nullable final ExecutableType methodType, @Nullable final VariableElement parameter, final boolean fromTreeContext, final boolean shouldUpdateOnChange, final boolean observable, final boolean disposable, @Nullable final ImmutableInputKeyStrategy immutableInputKeyStrategy, @Nonnull final String requiredValue) {
+        _descriptor = Objects.requireNonNull(descriptor);
+        _name = Objects.requireNonNull(name);
+        _qualifier = Objects.requireNonNull(qualifier);
+        _element = Objects.requireNonNull(element);
+        _type = Objects.requireNonNull(type);
+        _method = method;
+        _methodType = methodType;
+        _parameter = parameter;
+        _fromTreeContext = fromTreeContext;
+        _shouldUpdateOnChange = shouldUpdateOnChange;
+        _observable = observable;
+        _disposable = disposable;
+        _immutableInputKeyStrategy = immutableInputKeyStrategy;
+        _requiredValue = Objects.requireNonNull(requiredValue);
     }
-    else
-    {
-      _validateMethod = Objects.requireNonNull( method );
+
+    @Nonnull
+    String getName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  boolean hasDefaultField()
-  {
-    return null != _defaultField;
-  }
-
-  @Nonnull
-  VariableElement getDefaultField()
-  {
-    assert null != _defaultField;
-    return _defaultField;
-  }
-
-  void setDefaultField( @Nonnull final VariableElement field )
-  {
-    if ( isFromTreeContext() )
-    {
-      throw new ProcessorException( MemberChecks.mustNot( Constants.INPUT_DEFAULT_CLASSNAME,
-                                                          "be specified for an @Input that has fromTreeContext=true" ),
-                                    field );
+    @Nonnull
+    String getQualifier() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    if ( null != _defaultMethod )
-    {
-      throw new ProcessorException( "@InputDefault target duplicates existing method named " +
-                                    _defaultMethod.getSimpleName(), field );
+
+    @Nonnull
+    Element getElement() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else if ( null != _defaultField )
-    {
-      throw new ProcessorException( "@InputDefault target duplicates existing field named " +
-                                    _defaultField.getSimpleName(), field );
+
+    @Nonnull
+    TypeMirror getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _defaultField = Objects.requireNonNull( field );
+
+    boolean isMethodInput() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  boolean hasDefaultMethod()
-  {
-    return null != _defaultMethod;
-  }
-
-  @Nonnull
-  ExecutableElement getDefaultMethod()
-  {
-    assert null != _defaultMethod;
-    return _defaultMethod;
-  }
-
-  void setDefaultMethod( @Nonnull final ExecutableElement method )
-  {
-    if ( isFromTreeContext() )
-    {
-      throw new ProcessorException( MemberChecks.mustNot( Constants.INPUT_DEFAULT_CLASSNAME,
-                                                          "be specified for an @Input that has fromTreeContext=true" ),
-                                    method );
+    @Nullable
+    ExecutableElement getMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    if ( null != _defaultMethod )
-    {
-      throw new ProcessorException( "@InputDefault target duplicates existing method named " +
-                                    _defaultMethod.getSimpleName(), method );
+
+    @Nullable
+    ExecutableType getMethodType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      /*
-       * As all methods are processed first, there is no chance that a duplicate field will be detected
-       * prior to the field being set. If there is a duplicate field it will be detected in setDefaultField()
-       */
-      assert null == _defaultField;
-      _defaultMethod = Objects.requireNonNull( method );
+
+    @Nullable
+    VariableElement getParameter() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  boolean isOptional()
-  {
-    return _optional;
-  }
-
-  boolean isRequired()
-  {
-    return !isOptional();
-  }
-
-  boolean isNonNull()
-  {
-    if ( null == _isNonNull )
-    {
-      _isNonNull = AnnotationsUtil.hasNonnullAnnotation( getElement() );
+    boolean shouldUpdateOnChange() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _isNonNull;
-  }
 
-  void markAsOptional()
-  {
-    _optional = true;
-  }
+    boolean isObservable() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Nonnull
-  String getConstantName()
-  {
-    return getName();
-  }
+    boolean isDisposable() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isFromTreeContext()
-  {
-    return _fromTreeContext;
-  }
+    boolean isImmutable() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  boolean isSpecialChildrenInput()
-  {
-    return getName().equals( "children" ) || getName().equals( "child" );
-  }
+    @Nonnull
+    String getRequiredValue() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void markAsOnChangePresent() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void suppressMutableInputAccessedInPostConstruct() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean needsMutableInputAccessedInPostConstructInvariant() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean mayNeedMutableInputAccessedInPostConstructInvariant() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ImmutableInputKeyStrategy getImmutableInputKeyStrategy() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasValidateMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ExecutableElement getValidateMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setValidateMethod(@Nonnull final ExecutableElement method) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasDefaultField() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    VariableElement getDefaultField() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setDefaultField(@Nonnull final VariableElement field) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasDefaultMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ExecutableElement getDefaultMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setDefaultMethod(@Nonnull final ExecutableElement method) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isOptional() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isRequired() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isNonNull() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void markAsOptional() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    String getConstantName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isFromTreeContext() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean isSpecialChildrenInput() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

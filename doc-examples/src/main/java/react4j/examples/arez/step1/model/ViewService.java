@@ -6,24 +6,21 @@ import java.util.Objects;
 import javax.annotation.Nonnull;
 
 @ArezComponent
-public abstract class ViewService
-{
-  @Nonnull
-  private FilterMode _filterMode = FilterMode.ALL;
+public abstract class ViewService {
 
-  ViewService()
-  {
-  }
+    @Nonnull
+    private FilterMode _filterMode = FilterMode.ALL;
 
-  @Observable
-  @Nonnull
-  public FilterMode getFilterMode()
-  {
-    return _filterMode;
-  }
+    ViewService() {
+    }
 
-  public void setFilterMode( @Nonnull final FilterMode filterMode )
-  {
-    _filterMode = Objects.requireNonNull( filterMode );
-  }
+    @Observable
+    @Nonnull
+    public FilterMode getFilterMode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public void setFilterMode(@Nonnull final FilterMode filterMode) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

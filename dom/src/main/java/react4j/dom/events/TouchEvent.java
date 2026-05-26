@@ -6,60 +6,58 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class TouchEvent
-  extends SyntheticEvent<akasha.TouchEvent>
-{
-  private boolean altKey;
-  private TouchList changedTouches;
-  private boolean ctrlKey;
-  private boolean metaKey;
-  private boolean shiftKey;
-  private TouchList targetTouches;
-  private TouchList touches;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class TouchEvent extends SyntheticEvent<akasha.TouchEvent> {
 
-  public native boolean getModifierState( @Nonnull String key );
+    private boolean altKey;
 
-  @JsOverlay
-  public final boolean isAltKey()
-  {
-    return altKey;
-  }
+    private TouchList changedTouches;
 
-  @JsOverlay
-  public final TouchList getChangedTouches()
-  {
-    return changedTouches;
-  }
+    private boolean ctrlKey;
 
-  @JsOverlay
-  public final boolean isCtrlKey()
-  {
-    return ctrlKey;
-  }
+    private boolean metaKey;
 
-  @JsOverlay
-  public final boolean isMetaKey()
-  {
-    return metaKey;
-  }
+    private boolean shiftKey;
 
-  @JsOverlay
-  public final boolean isShiftKey()
-  {
-    return shiftKey;
-  }
+    private TouchList targetTouches;
 
-  @JsOverlay
-  public final TouchList getTargetTouches()
-  {
-    return targetTouches;
-  }
+    private TouchList touches;
 
-  @JsOverlay
-  public final TouchList getTouches()
-  {
-    return touches;
-  }
+    public native boolean getModifierState(@Nonnull String key);
+
+    @JsOverlay
+    public final boolean isAltKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final TouchList getChangedTouches() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isCtrlKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isMetaKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final boolean isShiftKey() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final TouchList getTargetTouches() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final TouchList getTouches() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }

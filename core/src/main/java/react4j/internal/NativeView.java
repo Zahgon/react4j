@@ -14,39 +14,37 @@ import react4j.ReactNode;
 /**
  * The react native component.
  */
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "React.Component" )
-@SuppressWarnings( "unused" )
-public abstract class NativeView
-{
-  @JsProperty( name = "props" )
-  private JsPropertyMap<Object> inputs;
-  @JsProperty
-  private JsPropertyMap<Object> state;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "React.Component")
+@SuppressWarnings("unused")
+public abstract class NativeView {
 
-  @JsConstructor
-  protected NativeView( @Nullable final JsPropertyMap<Object> inputs )
-  {
-  }
+    @JsProperty(name = "props")
+    private JsPropertyMap<Object> inputs;
 
-  @JsMethod
-  @Nullable
-  public abstract ReactNode render();
+    @JsProperty
+    private JsPropertyMap<Object> state;
 
-  @JsOverlay
-  @Nullable
-  public final JsPropertyMap<Object> inputs()
-  {
-    return inputs;
-  }
+    @JsConstructor
+    protected NativeView(@Nullable final JsPropertyMap<Object> inputs) {
+    }
 
-  @JsOverlay
-  @Nullable
-  public final JsPropertyMap<Object> state()
-  {
-    return state;
-  }
+    @JsMethod
+    @Nullable
+    public abstract ReactNode render();
 
-  public final native void setState( @Nonnull JsPropertyMap<Object> state );
+    @JsOverlay
+    @Nullable
+    public final JsPropertyMap<Object> inputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  public final native void forceUpdate();
+    @JsOverlay
+    @Nullable
+    public final JsPropertyMap<Object> state() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    public final native void setState(@Nonnull JsPropertyMap<Object> state);
+
+    public final native void forceUpdate();
 }

@@ -20,730 +20,502 @@ import org.realityforge.proton.GeneratorUtil;
 import org.realityforge.proton.MemberChecks;
 import org.realityforge.proton.ProcessorException;
 
-final class ViewDescriptor
-{
-  @Nonnull
-  private final String _name;
-  @Nonnull
-  private final TypeElement _element;
-  @Nonnull
-  private final ViewType _type;
-  private final boolean _exportBuilder;
-  private final boolean _sting;
-  private final boolean _hasConstructor;
-  private final boolean _hasPostConstruct;
-  private final boolean _shouldSetDefaultPriority;
-  @Nonnull
-  private final ExecutableElement _constructor;
-  @Nullable
-  private ExecutableElement _render;
-  @Nullable
-  private ExecutableElement _preUpdate;
-  @Nullable
-  private ExecutableElement _postRender;
-  @Nullable
-  private ExecutableElement _postUpdate;
-  @Nullable
-  private ExecutableElement _postMount;
-  @Nullable
-  private ExecutableElement _onError;
-  /**
-   * Methods that are inputs accessors.
-   * These should be implemented as accesses to the underlying inputs value.
-   */
-  @Nullable
-  private List<InputDescriptor> _inputs;
-  /**
-   * Methods that are inputs accessors.
-   * These should be implemented as accesses to the underlying inputs value.
-   */
-  @Nullable
-  private List<OnInputChangeDescriptor> _onInputChangeDescriptors;
-  /**
-   * Descriptors for methods annotated by @ScheduleRender.
-   */
-  @Nullable
-  private List<ScheduleRenderDescriptor> _scheduleRenderDescriptors;
-  /**
-   * Descriptors for methods annotated by @Publish.
-   */
-  @Nullable
-  private List<PublishDescriptor> _publishDescriptors;
-  /**
-   * Descriptors for methods annotated by @PreRender.
-   */
-  @Nullable
-  private List<RenderHookDescriptor> _preRenderHooks;
-  /**
-   * Descriptors for methods annotated by @PostRender.
-   */
-  @Nullable
-  private List<RenderHookDescriptor> _postRenderHooks;
-  @Nullable
-  private Boolean _validateInputs;
-  @Nullable
-  private Boolean _viewAccessesDeprecatedElements;
-  @Nullable
-  private Boolean _builderAccessesDeprecatedElements;
-  @Nullable
-  private List<PreludeChecksDescriptor> _preludeCheckCandidates;
-  @Nullable
-  private Boolean _hasDisposableInput;
-  @Nullable
-  private Boolean _hasNoValidateMethod;
+final class ViewDescriptor {
 
-  ViewDescriptor( @Nonnull final String name,
-                  @Nonnull final TypeElement element,
-                  @Nonnull final ExecutableElement constructor,
-                  @Nonnull final ViewType type,
-                  final boolean exportBuilder,
-                  final boolean sting,
-                  final boolean hasConstructor,
-                  final boolean hasPostConstruct,
-                  final boolean shouldSetDefaultPriority )
-  {
-    _name = Objects.requireNonNull( name );
-    _element = Objects.requireNonNull( element );
-    _constructor = Objects.requireNonNull( constructor );
-    _type = Objects.requireNonNull( type );
-    _exportBuilder = exportBuilder;
-    _sting = sting;
-    _hasConstructor = hasConstructor;
-    _hasPostConstruct = hasPostConstruct;
-    _shouldSetDefaultPriority = shouldSetDefaultPriority;
-  }
+    @Nonnull
+    private final String _name;
 
-  @Nonnull
-  String keySuffix()
-  {
-    return "_" + _element.getSimpleName() + "_" + shortSha( _element.getQualifiedName().toString() );
-  }
+    @Nonnull
+    private final TypeElement _element;
 
-  @Nonnull
-  ExecutableElement getConstructor()
-  {
-    return _constructor;
-  }
+    @Nonnull
+    private final ViewType _type;
 
-  boolean enableSting()
-  {
-    return _sting;
-  }
+    private final boolean _exportBuilder;
 
-  boolean exportBuilder()
-  {
-    return _exportBuilder;
-  }
+    private final boolean _sting;
 
-  boolean hasConstructor()
-  {
-    return _hasConstructor;
-  }
+    private final boolean _hasConstructor;
 
-  boolean hasPostConstruct()
-  {
-    return _hasPostConstruct;
-  }
+    private final boolean _hasPostConstruct;
 
-  boolean shouldSetDefaultPriority()
-  {
-    return _shouldSetDefaultPriority;
-  }
+    private final boolean _shouldSetDefaultPriority;
 
-  boolean requireRender()
-  {
-    return ViewType.NO_RENDER != _type;
-  }
+    @Nonnull
+    private final ExecutableElement _constructor;
 
-  @Nonnull
-  String getPackageName()
-  {
-    return GeneratorUtil.getQualifiedPackageName( _element );
-  }
+    @Nullable
+    private ExecutableElement _render;
 
-  @Nonnull
-  String getName()
-  {
-    return _name;
-  }
+    @Nullable
+    private ExecutableElement _preUpdate;
 
-  @Nonnull
-  String getDisplayName()
-  {
-    return trimViewSuffix( getName() );
-  }
+    @Nullable
+    private ExecutableElement _postRender;
 
-  @Nonnull
-  ClassName getClassName()
-  {
-    return ClassName.get( getElement() );
-  }
+    @Nullable
+    private ExecutableElement _postUpdate;
 
-  @Nonnull
-  TypeElement getElement()
-  {
-    return _element;
-  }
+    @Nullable
+    private ExecutableElement _postMount;
 
-  @Nonnull
-  DeclaredType getDeclaredType()
-  {
-    return (DeclaredType) _element.asType();
-  }
+    @Nullable
+    private ExecutableElement _onError;
 
-  @Nonnull
-  ClassName getEnhancedClassName()
-  {
-    return GeneratorUtil.getGeneratedClassName( _element, "React4j_", "" );
-  }
+    /**
+     * Methods that are inputs accessors.
+     * These should be implemented as accesses to the underlying inputs value.
+     */
+    @Nullable
+    private List<InputDescriptor> _inputs;
 
-  @Nonnull
-  ClassName getBuilderClassName()
-  {
-    return ClassName.get( getPackageName(), getBuilderSimpleName() );
-  }
+    /**
+     * Methods that are inputs accessors.
+     * These should be implemented as accesses to the underlying inputs value.
+     */
+    @Nullable
+    private List<OnInputChangeDescriptor> _onInputChangeDescriptors;
 
-  @Nonnull
-  String getBuilderSimpleName()
-  {
-    return trimViewSuffix( GeneratorUtil.getGeneratedSimpleClassName( _element, "", "" ) ) + "Builder";
-  }
+    /**
+     * Descriptors for methods annotated by @ScheduleRender.
+     */
+    @Nullable
+    private List<ScheduleRenderDescriptor> _scheduleRenderDescriptors;
 
-  @Nonnull
-  ClassName getFactoryClassName()
-  {
-    return GeneratorUtil.getGeneratedClassName( _element, "React4j_", "Factory" );
-  }
+    /**
+     * Descriptors for methods annotated by @Publish.
+     */
+    @Nullable
+    private List<PublishDescriptor> _publishDescriptors;
 
-  @Nonnull
-  private static String trimViewSuffix( @Nonnull final String name )
-  {
-    return name.endsWith( "View" ) ? name.substring( 0, name.length() - "View".length() ) : name;
-  }
+    /**
+     * Descriptors for methods annotated by @PreRender.
+     */
+    @Nullable
+    private List<RenderHookDescriptor> _preRenderHooks;
 
-  @Nonnull
-  ClassName getArezClassName()
-  {
-    final String simpleName = "Arez_" + GeneratorUtil.getGeneratedSimpleClassName( _element, "React4j_", "" );
-    return ClassName.get( getPackageName(), simpleName );
-  }
+    /**
+     * Descriptors for methods annotated by @PostRender.
+     */
+    @Nullable
+    private List<RenderHookDescriptor> _postRenderHooks;
 
-  @Nonnull
-  TypeName getViewType()
-  {
-    final var typeNames = getDeclaredType().getTypeArguments().stream().map( TypeName::get ).toList();
-    if ( !typeNames.isEmpty() )
-    {
-      return ParameterizedTypeName.get( ClassName.get( getElement() ), typeNames.toArray( new TypeName[ 0 ] ) );
+    @Nullable
+    private Boolean _validateInputs;
+
+    @Nullable
+    private Boolean _viewAccessesDeprecatedElements;
+
+    @Nullable
+    private Boolean _builderAccessesDeprecatedElements;
+
+    @Nullable
+    private List<PreludeChecksDescriptor> _preludeCheckCandidates;
+
+    @Nullable
+    private Boolean _hasDisposableInput;
+
+    @Nullable
+    private Boolean _hasNoValidateMethod;
+
+    ViewDescriptor(@Nonnull final String name, @Nonnull final TypeElement element, @Nonnull final ExecutableElement constructor, @Nonnull final ViewType type, final boolean exportBuilder, final boolean sting, final boolean hasConstructor, final boolean hasPostConstruct, final boolean shouldSetDefaultPriority) {
+        _name = Objects.requireNonNull(name);
+        _element = Objects.requireNonNull(element);
+        _constructor = Objects.requireNonNull(constructor);
+        _type = Objects.requireNonNull(type);
+        _exportBuilder = exportBuilder;
+        _sting = sting;
+        _hasConstructor = hasConstructor;
+        _hasPostConstruct = hasPostConstruct;
+        _shouldSetDefaultPriority = shouldSetDefaultPriority;
     }
-    else
-    {
-      return ClassName.get( getElement() );
+
+    @Nonnull
+    String keySuffix() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  boolean needsInjection()
-  {
-    return !_constructor.getParameters()
-      .stream()
-      .filter( parameter -> !AnnotationsUtil.hasAnnotationOfType( parameter, Constants.INPUT_CLASSNAME ) )
-      .toList()
-      .isEmpty();
-  }
-
-  boolean trackRender()
-  {
-    return ( ViewType.MAYBE_TRACKING == _type || ViewType.TRACKING == _type ) && hasRender();
-  }
-
-  @Nonnull
-  ViewType getType()
-  {
-    return _type;
-  }
-
-  int syntheticKeyParts()
-  {
-    return (int) getInputs().stream().filter( InputDescriptor::isImmutable ).count();
-  }
-
-  boolean hasDisposableInput()
-  {
-    if ( null == _hasDisposableInput )
-    {
-      _hasDisposableInput = getInputs().stream().anyMatch( InputDescriptor::isDisposable );
+    @Nonnull
+    ExecutableElement getConstructor() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _hasDisposableInput;
-  }
 
-  boolean hasNoValidateMethod()
-  {
-    if ( null == _hasNoValidateMethod )
-    {
-      _hasNoValidateMethod = getInputs().stream().noneMatch( InputDescriptor::hasValidateMethod );
+    boolean enableSting() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _hasNoValidateMethod;
-  }
 
-  @Nonnull
-  List<InputDescriptor> getImmutableInputs()
-  {
-    assert null != _inputs;
-    return _inputs.stream().filter( InputDescriptor::isImmutable ).collect( Collectors.toList() );
-  }
-
-  @Nonnull
-  List<InputDescriptor> getConstructorInputs()
-  {
-    return getConstructor().getParameters()
-      .stream()
-      .map( parameter -> (VariableElement) parameter )
-      .filter( parameter -> AnnotationsUtil.hasAnnotationOfType( parameter, Constants.INPUT_CLASSNAME ) )
-      .map( parameter -> {
-        final InputDescriptor input = findInputNamed( parameter.getSimpleName().toString() );
-        assert null != input;
-        return input;
-      } )
-      .toList();
-  }
-
-  @Nonnull
-  List<VariableElement> getInjectableConstructorParameters()
-  {
-    return getConstructor().getParameters()
-      .stream()
-      .map( parameter -> (VariableElement) parameter )
-      .filter( parameter -> !AnnotationsUtil.hasAnnotationOfType( parameter, Constants.INPUT_CLASSNAME ) )
-      .toList();
-  }
-
-  @Nonnull
-  List<InputDescriptor> getUpdateOnChangeInputs()
-  {
-    return
-      getInputs()
-        .stream()
-        .filter( InputDescriptor::shouldUpdateOnChange )
-        // Observable properties already checked above
-        .filter( p -> !p.isObservable() )
-        .toList();
-  }
-
-  @Nonnull
-  List<InputDescriptor> getObservableInputs()
-  {
-    return
-      getInputs()
-        .stream()
-        .filter( InputDescriptor::isObservable )
-        .toList();
-  }
-
-  @Nonnull
-  List<InputDescriptor> getInputs()
-  {
-    assert null != _inputs;
-    return _inputs;
-  }
-
-  void setInputs( @Nonnull final List<InputDescriptor> events )
-  {
-    _inputs = Objects.requireNonNull( events );
-  }
-
-  @Nonnull
-  List<PreludeChecksDescriptor> getPreludeCheckCandidates()
-  {
-    assert null != _preludeCheckCandidates;
-    return _preludeCheckCandidates;
-  }
-
-  void setPreludeCheckCandidates( @Nonnull final List<PreludeChecksDescriptor> preludeCheckCandidates )
-  {
-    _preludeCheckCandidates = Objects.requireNonNull( preludeCheckCandidates );
-  }
-
-  @Nullable
-  InputDescriptor findInputNamed( @Nonnull final String name )
-  {
-    return getInputs().stream().filter( p -> p.getName().equals( name ) ).findAny().orElse( null );
-  }
-
-  /**
-   * Needs to be invoked after all the inputs have been completely constructed.
-   */
-  void sortInputs()
-  {
-    assert null != _inputs;
-    _inputs.sort( InputComparator.COMPARATOR );
-  }
-
-  @Nonnull
-  List<OnInputChangeDescriptor> getPreUpdateOnInputChangeDescriptors()
-  {
-    return getOnInputChangeDescriptors()
-      .stream()
-      .filter( OnInputChangeDescriptor::isPreUpdate )
-      .collect( Collectors.toList() );
-  }
-
-  @Nonnull
-  List<OnInputChangeDescriptor> getPostUpdateOnInputChangeDescriptors()
-  {
-    return getOnInputChangeDescriptors().stream().filter( o -> !o.isPreUpdate() ).collect( Collectors.toList() );
-  }
-
-  @Nonnull
-  private List<OnInputChangeDescriptor> getOnInputChangeDescriptors()
-  {
-    assert null != _onInputChangeDescriptors;
-    return _onInputChangeDescriptors;
-  }
-
-  void setOnInputChangeDescriptors( @Nonnull List<OnInputChangeDescriptor> onInputChangeDescriptors )
-  {
-    _onInputChangeDescriptors = Objects.requireNonNull( onInputChangeDescriptors );
-  }
-
-  @Nonnull
-  List<ScheduleRenderDescriptor> getScheduleRenderDescriptors()
-  {
-    assert null != _scheduleRenderDescriptors;
-    return _scheduleRenderDescriptors;
-  }
-
-  void setScheduleRenderDescriptors( @Nonnull final List<ScheduleRenderDescriptor> scheduleRenderDescriptors )
-  {
-    _scheduleRenderDescriptors = Objects.requireNonNull( scheduleRenderDescriptors );
-  }
-
-  @Nonnull
-  List<PublishDescriptor> getPublishDescriptors()
-  {
-    assert null != _publishDescriptors;
-    return _publishDescriptors;
-  }
-
-  void setPublishDescriptors( @Nonnull final List<PublishDescriptor> publishDescriptors )
-  {
-    _publishDescriptors = Objects.requireNonNull( publishDescriptors );
-  }
-
-  @Nonnull
-  List<RenderHookDescriptor> getPreRenderDescriptors()
-  {
-    assert null != _preRenderHooks;
-    return _preRenderHooks;
-  }
-
-  void setPreRenderDescriptors( @Nonnull final List<RenderHookDescriptor> preRenderDescriptors )
-  {
-    _preRenderHooks = Objects.requireNonNull( preRenderDescriptors );
-  }
-
-  @Nonnull
-  List<RenderHookDescriptor> getPostRenderDescriptors()
-  {
-    assert null != _postRenderHooks;
-    return _postRenderHooks;
-  }
-
-  void setPostRenderDescriptors( @Nonnull final List<RenderHookDescriptor> postRenderDescriptors )
-  {
-    _postRenderHooks = Objects.requireNonNull( postRenderDescriptors );
-  }
-
-  boolean hasObservableInputs()
-  {
-    return getInputs().stream().anyMatch( InputDescriptor::isObservable );
-  }
-
-  @Nullable
-  ExecutableElement getPreUpdate()
-  {
-    return _preUpdate;
-  }
-
-  void setPreUpdate( @Nonnull final ExecutableElement preUpdate )
-    throws ProcessorException
-  {
-    if ( null != _preUpdate )
-    {
-      throw new ProcessorException( "@PreUpdate target duplicates existing method named " + _preUpdate.getSimpleName(),
-                                    preUpdate );
+    boolean exportBuilder() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _preUpdate = preUpdate;
+
+    boolean hasConstructor() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  boolean shouldGenerateRender()
-  {
-    assert null != _preRenderHooks;
-    assert null != _postRenderHooks;
-    return hasRender() || !_preRenderHooks.isEmpty() || !_postRenderHooks.isEmpty();
-  }
-
-  boolean hasRender()
-  {
-    return null != _render;
-  }
-
-  @Nonnull
-  ExecutableElement getRender()
-  {
-    assert null != _render;
-    return _render;
-  }
-
-  void setRender( @Nonnull final ExecutableElement render )
-  {
-    if ( null != _render )
-    {
-      throw new ProcessorException( MemberChecks.mustNot( Constants.RENDER_CLASSNAME,
-                                                          "be present when another method named " +
-                                                          _render.getSimpleName() +
-                                                          " exists with the same annotation" ), render );
+    boolean hasPostConstruct() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    _render = Objects.requireNonNull( render );
-  }
 
-  @Nullable
-  ExecutableElement getPostRender()
-  {
-    return _postRender;
-  }
-
-  void setPostRender( @Nonnull final ExecutableElement postRender )
-    throws ProcessorException
-  {
-    if ( null != _postRender )
-    {
-      throw new ProcessorException( "@PostMountOrUpdate target duplicates existing method named " +
-                                    _postRender.getSimpleName(), postRender );
+    boolean shouldSetDefaultPriority() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _postRender = postRender;
+
+    boolean requireRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  @Nullable
-  ExecutableElement getPostUpdate()
-  {
-    return _postUpdate;
-  }
-
-  void setPostUpdate( @Nonnull final ExecutableElement postUpdate )
-    throws ProcessorException
-  {
-    if ( null != _postUpdate )
-    {
-      throw new ProcessorException( "@PostUpdate target duplicates existing method named " +
-                                    _postUpdate.getSimpleName(), postUpdate );
+    @Nonnull
+    String getPackageName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _postUpdate = postUpdate;
+
+    @Nonnull
+    String getName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  @Nullable
-  ExecutableElement getPostMount()
-  {
-    return _postMount;
-  }
-
-  void setPostMount( @Nonnull final ExecutableElement postMount )
-    throws ProcessorException
-  {
-    if ( null != _postMount )
-    {
-      throw new ProcessorException( "@PostMount target duplicates existing method named " + _postMount.getSimpleName(),
-                                    postMount );
+    @Nonnull
+    String getDisplayName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _postMount = postMount;
+
+    @Nonnull
+    ClassName getClassName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  @Nullable
-  ExecutableElement getOnError()
-  {
-    return _onError;
-  }
-
-  void setOnError( @Nonnull final ExecutableElement onError )
-    throws ProcessorException
-  {
-
-    if ( null != _onError )
-    {
-      throw new ProcessorException( "@OnError target duplicates existing method named " + _onError.getSimpleName(),
-                                    onError );
+    @Nonnull
+    TypeElement getElement() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    else
-    {
-      _onError = onError;
+
+    @Nonnull
+    DeclaredType getDeclaredType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
 
-  private boolean shouldGenerateLifecycle()
-  {
-    return generateComponentDidMount() ||
-           generateShouldComponentUpdate() ||
-           generateComponentPreUpdate() ||
-           generateComponentDidUpdate() ||
-           generateComponentWillUnmount() ||
-           generateComponentDidCatch();
-  }
-
-  boolean shouldGenerateLiteLifecycle()
-  {
-    // A "Lite" lifecycle is the one used in production code and is a subset of the non-lite lifecycle. The
-    // non-lite exists if there are extra lifecycle methods generated for collecting debug information.
-    // If both modes have the same lifecycle hooks then we avoid generating a lite variant.
-    return ( generateComponentDidUpdateInLiteLifecycle() != generateComponentDidUpdate() ||
-             generateComponentWillUnmountInLiteLifecycle() != generateComponentWillUnmount() ||
-             generateComponentDidMountInLiteLifecycle() != generateComponentDidMount() ) &&
-           shouldGenerateLifecycle();
-  }
-
-  boolean generateShouldComponentUpdate()
-  {
-    return trackRender() || hasObservableInputs() || !getUpdateOnChangeInputs().isEmpty() || shouldValidateInputs();
-  }
-
-  boolean generateShouldComponentUpdateInLiteLifecycle()
-  {
-    // We currently always generate shouldComponentUpdate. If we happen to be a non-tracking view
-    // with no mutable inputs and no inputs that are validated, then we just return false to block re-render
-    return true;
-  }
-
-  boolean generateComponentDidCatch()
-  {
-    return null != _onError;
-  }
-
-  boolean generateComponentWillUnmountInLiteLifecycle()
-  {
-    return true; // type == STATELESS || type == TRACKING || MAYBE_TRACKING
-  }
-
-  boolean generateComponentWillUnmount()
-  {
-    return true; // type == STATELESS || type == TRACKING || MAYBE_TRACKING
-  }
-
-  boolean generateComponentPreUpdate()
-  {
-    return hasPreUpdateOnInputChange() || null != _preUpdate;
-  }
-
-  boolean generateComponentDidMount()
-  {
-    return generateComponentDidMountInLiteLifecycle() ||
-           // We do it when tracking render so we can store debug information in state
-           trackRender();
-  }
-
-  boolean generateComponentDidMountInLiteLifecycle()
-  {
-    return null != _postMount || null != _postRender;
-  }
-
-  boolean hasPreUpdateOnInputChange()
-  {
-    return !getPreUpdateOnInputChangeDescriptors().isEmpty();
-  }
-
-  boolean hasPostUpdateOnInputChange()
-  {
-    return !getPostUpdateOnInputChangeDescriptors().isEmpty();
-  }
-
-  boolean generateComponentDidUpdate()
-  {
-    return generateComponentDidUpdateInLiteLifecycle() ||
-           // We do it when tracking render so we can store debug information in state
-           trackRender();
-  }
-
-  boolean generateComponentDidUpdateInLiteLifecycle()
-  {
-    return hasPostUpdateOnInputChange() || null != _postUpdate || null != _postRender;
-  }
-
-  boolean shouldValidateInputs()
-  {
-    if ( null == _validateInputs )
-    {
-      _validateInputs = getInputs()
-        .stream()
-        .anyMatch( input -> input.hasValidateMethod() ||
-                            ( input.isNonNull() && ( input.isRequired() || input.isFromTreeContext() ) ) );
+    @Nonnull
+    ClassName getEnhancedClassName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _validateInputs;
-  }
 
-  boolean viewAccessesDeprecatedElements()
-  {
-    if ( null == _viewAccessesDeprecatedElements )
-    {
-      _viewAccessesDeprecatedElements =
-        isDeprecated( _element ) ||
-        isDeprecated( _constructor ) ||
-        isDeprecated( _preUpdate ) ||
-        isDeprecated( _postRender ) ||
-        isDeprecated( _postMount ) ||
-        isDeprecated( _postUpdate ) ||
-        isDeprecated( _onError ) ||
-        getInputs().stream()
-          .anyMatch( p -> isDeprecated( p.getElement() ) ||
-                          p.hasValidateMethod() && isDeprecated( p.getValidateMethod() ) ) ||
-        getPostUpdateOnInputChangeDescriptors().stream().anyMatch( d -> isDeprecated( d.getMethod() ) );
+    @Nonnull
+    ClassName getBuilderClassName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _viewAccessesDeprecatedElements;
-  }
 
-  boolean builderAccessesDeprecatedElements()
-  {
-    if ( null == _builderAccessesDeprecatedElements )
-    {
-      _builderAccessesDeprecatedElements =
-        isDeprecated( _element ) ||
-        getInputs().stream().anyMatch( p -> p.hasDefaultMethod() && isDeprecated( p.getDefaultMethod() ) ||
-                                            p.hasDefaultField() && isDeprecated( p.getDefaultField() ) );
+    @Nonnull
+    String getBuilderSimpleName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-    return _builderAccessesDeprecatedElements;
-  }
 
-  private boolean isDeprecated( @Nullable final Element element )
-  {
-    return null != element && null != element.getAnnotation( Deprecated.class );
-  }
+    @Nonnull
+    ClassName getFactoryClassName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 
-  @Nonnull
-  private String shortSha( @Nonnull final String text )
-  {
-    try
-    {
-      final MessageDigest algo = MessageDigest.getInstance( "SHA-1" );
-      final byte[] digest = algo.digest( text.getBytes() );
-      final StringBuilder sb = new StringBuilder();
-      for ( int i = 0; i < 4; i++ )
-      {
-        final byte value = digest[ i ];
-        sb.append( Integer.toString( ( value & 0xff ) + 0x100, 16 ).substring( 1 ) );
-      }
-      return sb.toString();
+    @Nonnull
+    private static String trimViewSuffix(@Nonnull final String name) {
+        return name.endsWith("View") ? name.substring(0, name.length() - "View".length()) : name;
     }
-    catch ( final NoSuchAlgorithmException e )
-    {
-      throw new IllegalStateException( e );
+
+    @Nonnull
+    ClassName getArezClassName() {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-  }
+
+    @Nonnull
+    TypeName getViewType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean needsInjection() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean trackRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ViewType getType() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    int syntheticKeyParts() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasDisposableInput() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasNoValidateMethod() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<InputDescriptor> getImmutableInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<InputDescriptor> getConstructorInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<VariableElement> getInjectableConstructorParameters() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<InputDescriptor> getUpdateOnChangeInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<InputDescriptor> getObservableInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<InputDescriptor> getInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setInputs(@Nonnull final List<InputDescriptor> events) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<PreludeChecksDescriptor> getPreludeCheckCandidates() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPreludeCheckCandidates(@Nonnull final List<PreludeChecksDescriptor> preludeCheckCandidates) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    InputDescriptor findInputNamed(@Nonnull final String name) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Needs to be invoked after all the inputs have been completely constructed.
+     */
+    void sortInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<OnInputChangeDescriptor> getPreUpdateOnInputChangeDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<OnInputChangeDescriptor> getPostUpdateOnInputChangeDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    private List<OnInputChangeDescriptor> getOnInputChangeDescriptors() {
+        assert null != _onInputChangeDescriptors;
+        return _onInputChangeDescriptors;
+    }
+
+    void setOnInputChangeDescriptors(@Nonnull List<OnInputChangeDescriptor> onInputChangeDescriptors) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<ScheduleRenderDescriptor> getScheduleRenderDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setScheduleRenderDescriptors(@Nonnull final List<ScheduleRenderDescriptor> scheduleRenderDescriptors) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<PublishDescriptor> getPublishDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPublishDescriptors(@Nonnull final List<PublishDescriptor> publishDescriptors) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<RenderHookDescriptor> getPreRenderDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPreRenderDescriptors(@Nonnull final List<RenderHookDescriptor> preRenderDescriptors) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    List<RenderHookDescriptor> getPostRenderDescriptors() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPostRenderDescriptors(@Nonnull final List<RenderHookDescriptor> postRenderDescriptors) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasObservableInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    ExecutableElement getPreUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPreUpdate(@Nonnull final ExecutableElement preUpdate) throws ProcessorException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean shouldGenerateRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nonnull
+    ExecutableElement getRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setRender(@Nonnull final ExecutableElement render) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    ExecutableElement getPostRender() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPostRender(@Nonnull final ExecutableElement postRender) throws ProcessorException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    ExecutableElement getPostUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPostUpdate(@Nonnull final ExecutableElement postUpdate) throws ProcessorException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    ExecutableElement getPostMount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setPostMount(@Nonnull final ExecutableElement postMount) throws ProcessorException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @Nullable
+    ExecutableElement getOnError() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    void setOnError(@Nonnull final ExecutableElement onError) throws ProcessorException {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private boolean shouldGenerateLifecycle() {
+        return generateComponentDidMount() || generateShouldComponentUpdate() || generateComponentPreUpdate() || generateComponentDidUpdate() || generateComponentWillUnmount() || generateComponentDidCatch();
+    }
+
+    boolean shouldGenerateLiteLifecycle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateShouldComponentUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateShouldComponentUpdateInLiteLifecycle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentDidCatch() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentWillUnmountInLiteLifecycle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentWillUnmount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentPreUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentDidMount() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentDidMountInLiteLifecycle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasPreUpdateOnInputChange() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean hasPostUpdateOnInputChange() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentDidUpdate() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean generateComponentDidUpdateInLiteLifecycle() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean shouldValidateInputs() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean viewAccessesDeprecatedElements() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    boolean builderAccessesDeprecatedElements() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    private boolean isDeprecated(@Nullable final Element element) {
+        return null != element && null != element.getAnnotation(Deprecated.class);
+    }
+
+    @Nonnull
+    private String shortSha(@Nonnull final String text) {
+        try {
+            final MessageDigest algo = MessageDigest.getInstance("SHA-1");
+            final byte[] digest = algo.digest(text.getBytes());
+            final StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < 4; i++) {
+                final byte value = digest[i];
+                sb.append(Integer.toString((value & 0xff) + 0x100, 16).substring(1));
+            }
+            return sb.toString();
+        } catch (final NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 }

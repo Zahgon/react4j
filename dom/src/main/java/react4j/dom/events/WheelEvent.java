@@ -4,37 +4,35 @@ import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-@SuppressWarnings( "unused" )
-public class WheelEvent
-  extends SyntheticEvent<akasha.WheelEvent>
-{
-  private int deltaMode;
-  private int deltaX;
-  private int deltaY;
-  private int deltaZ;
+@JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Object")
+@SuppressWarnings("unused")
+public class WheelEvent extends SyntheticEvent<akasha.WheelEvent> {
 
-  @JsOverlay
-  public final int getDeltaMode()
-  {
-    return deltaMode;
-  }
+    private int deltaMode;
 
-  @JsOverlay
-  public final int getDeltaX()
-  {
-    return deltaX;
-  }
+    private int deltaX;
 
-  @JsOverlay
-  public final int getDeltaY()
-  {
-    return deltaY;
-  }
+    private int deltaY;
 
-  @JsOverlay
-  public final int getDeltaZ()
-  {
-    return deltaZ;
-  }
+    private int deltaZ;
+
+    @JsOverlay
+    public final int getDeltaMode() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getDeltaX() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getDeltaY() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    @JsOverlay
+    public final int getDeltaZ() {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
 }
